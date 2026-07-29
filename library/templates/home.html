@@ -1,0 +1,235 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+لیست کتاب‌ها
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<div class="text-center py-5 mb-5 rounded-4 shadow"
+     style="background:linear-gradient(135deg,#2563eb,#1e3a8a);color:white;">
+
+    <h1 class="display-4 fw-bold">
+        کتابخانه من
+    </h1>
+
+    <p class="lead mb-4">
+        مدیریت کتاب‌ها با Django
+    </p>
+
+    {% if user.is_authenticated %}
+
+        <h5>👋 خوش آمدی {{ user.username }}</h5>
+
+    {% else %}
+
+        <a href="{% url 'login' %}" class="btn btn-warning btn-lg">
+            🚀 شروع کنید
+        </a>
+
+    {% endif %}
+
+</div>
+
+
+
+<!-- جستجو -->
+<form method="GET" class="search-form mb-5">
+
+    {% if request.GET.category %}
+    <input type="hidden" name="category" value="{{ request.GET.category }}">
+    {% endif %}
+
+    <div class="search-box">
+
+        <span class="search-icon">
+            <i class="bi bi-search"></i>
+        </span>
+
+        <input
+            type="text"
+            name="q"
+            value="{{ request.GET.q }}"
+            class="search-input"
+            placeholder="نام کتاب، نویسنده یا ناشر را جستجو کنید...">
+
+        {% if request.GET.q %}
+        <a href="{% url 'home' %}" class="clear-btn">
+            <i class="bi bi-x-lg"></i>
+        </a>
+        {% endif %}
+
+        <button type="submit" class="search-btn">
+            جستجو
+        </button>
+
+    </div>
+
+</form>
+
+
+</form>
+<div class="mb-4">
+
+    <a href="{% url 'home' %}"
+       class="btn btn-outline-primary btn-sm mb-2">
+        همه کتاب‌ها
+    </a>
+
+    {% for category in categories %}
+
+        <a href="?category={{ category.id }}"
+           class="btn btn-outline-secondary btn-sm mb-2">
+            {{ category.name }}
+        </a>
+
+    {% endfor %}
+
+</div>
+<div class="row">
+
+{% for book in books %}
+
+<div class="col-lg-4 col-md-6 mb-4">
+
+    <div class="card shadow border-0 rounded-4 h-100">
+        {% if book.image %}
+        <img src="{{ book.image.url }}"
+     class="card-img-top"
+     style="height:300px; object-fit:cover; background:#f8f9fa;"
+     alt="{{ book.title }}">
+    {% else %}
+        <div class="text-center py-5 bg-light">
+            <span style="font-size:70px;">📚</span>
+            
+        </div>
+    {% endif %}
+
+       <div class="card-body">
+
+    
+
+    <h4 class="card-title text-center">
+        {{ book.title }}
+    </h4>
+
+    <hr>
+
+    <p class="text-secondary">
+        <strong> نویسنده:</strong>
+        {{ book.author }}
+    </p>
+    <p>
+    <strong>📂 دسته‌بندی:</strong>
+
+    {% if book.category %}
+        <span class="badge bg-primary">
+            {{ book.category.name }}
+        </span>
+    {% else %}
+        <span class="badge bg-secondary">
+            بدون دسته
+        </span>
+    {% endif %}
+    </p>
+
+    {% if book.description %}
+    <p class="text-muted">
+        {{ book.description|truncatechars:100 }}
+    </p>
+    {% endif %}
+
+</div>
+
+
+
+
+        <div class="card-footer bg-white border-0 d-flex gap-2">
+
+    <a href="{% url 'book_detail' book.id %}"
+       class="btn btn-primary flex-fill rounded-pill">
+       👁 جزئیات
+    </a>
+
+    {% if user.is_authenticated %}
+
+    <a href="{% url 'edit_book' book.id %}"
+       class="btn btn-warning flex-fill rounded-pill">
+       ✏️ ویرایش
+    </a>
+
+    <a href="{% url 'delete_book' book.id %}"
+       class="btn btn-danger flex-fill rounded-pill"
+       onclick="return confirm('از حذف این کتاب مطمئن هستید؟')">
+       🗑 حذف
+    </a>
+
+    {% endif %}
+
+</div>
+
+
+
+    </div>
+
+</div>
+
+{% empty %}
+
+<div class="col-12">
+
+    <div class="alert alert-info text-center rounded-4 p-4">
+
+        <h4>کتابی با این نام وجود ندارد</h4>
+
+        <p class="mb-0">
+            از دکمه «افزودن کتاب» برای ثبت اولین کتاب استفاده کن.
+        </p>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<nav class="mt-4">
+    <ul class="pagination justify-content-center">
+
+        {% if books.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ books.previous_page_number }}">
+                قبلی
+            </a>
+        </li>
+        {% endif %}
+
+        {% for num in books.paginator.page_range %}
+        <li class="page-item {% if books.number == num %}active{% endif %}">
+            <a class="page-link" href="?page={{ num }}">
+                {{ num }}
+            </a>
+        </li>
+        {% endfor %}
+
+        {% if books.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ books.next_page_number }}">
+                بعدی
+            </a>
+        </li>
+        {% endif %}
+
+    </ul>
+</nav>
+
+
+
+
+
+{% endblock %}

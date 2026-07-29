@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+ثبت نام
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5" style="max-width:500px;">
+
+    <div class="card shadow p-4">
+
+        <h3 class="text-center mb-4">
+            ثبت نام
+        </h3>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+            {% if form.errors %}
+            <div style="color:red;">
+            {{ form.errors }}
+            </div>
+            {% endif %}
+
+            <button type="submit" class="btn btn-success w-100">
+                ثبت نام
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}
+

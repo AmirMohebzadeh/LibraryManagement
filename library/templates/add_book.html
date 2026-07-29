@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+افزودن کتاب
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<div class="row justify-content-center">
+
+<div class="col-md-6">
+
+
+<div class="card p-4">
+
+
+<h2 class="text-center text-primary mb-4">
+📚 افزودن کتاب جدید
+</h2>
+
+
+<form method="POST" enctype="multipart/form-data">
+
+{% csrf_token %}
+{{ form.non_field_errors }}
+
+
+{% for field in form %}
+
+<div class="mb-3">
+
+<label class="form-label fw-bold">
+{{ field.label }}
+</label>
+
+{{ field }}
+{{ field.errors }}
+
+{% if field.errors %}
+<div class="text-danger">
+{{ field.errors }}
+</div>
+{% endif %}
+
+</div>
+
+{% endfor %}
+
+
+<button class="btn btn-success w-100 mt-3">
+➕ ذخیره کتاب
+</button>
+
+
+</form>
+
+
+</div>
+
+
+</div>
+
+</div>
+
+
+{% endblock %}
