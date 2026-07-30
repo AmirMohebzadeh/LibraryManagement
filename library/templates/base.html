@@ -9,355 +9,13 @@
 href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <title>{% block title %}{% endblock %}</title>
-
+     {% load static %}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800&display=swap" rel="stylesheet">
-    <style>
-
-    body{
-    background:#f4f7fb;
-    font-family:'Vazirmatn', sans-serif;
-     }   
-
-    .navbar{
-        background:linear-gradient(90deg,#0f172a,#2563eb);
-        padding:15px 0;
-        box-shadow:0 10px 25px rgba(0,0,0,.15);
-    }
-
-    .navbar-brand{
-        color:white!important;
-        font-size:28px;
-        font-weight:bold;
-    }
-
-    .add-btn{
-        background:#22c55e;
-        color:white;
-        border-radius:10px;
-        padding:10px 20px;
-        text-decoration:none;
-        transition:.3s;
-    }
-
-    .add-btn:hover{
-        background:#16a34a;
-        color:white;
-    }
-    .card{
-    border:none;
-    border-radius:15px;
-    box-shadow:0 10px 25px rgba(0,0,0,.1);
-    transition:.3s;
-}
-
-.card:hover{
-    transform:translateY(-6px);
-    box-shadow:0 15px 35px rgba(0,0,0,.2);
-}
-
-.card-title{
-    color:#0d6efd;
-    font-weight:bold;
-}
-
-.card-footer{
-    background:white;
-    border:none;
-}
-
-.btn-warning{
-    color:white;
-}
-
-.btn{
-    border-radius:10px;
-}
-body{
-    background:#f4f7fc;
-}
-
-.card{
-    border:none;
-    border-radius:20px;
-    overflow:hidden;
-    transition:0.3s;
-    box-shadow:0 8px 25px rgba(0,0,0,0.08);
-}
-
-.card:hover{
-    transform:translateY(-8px);
-    box-shadow:0 15px 35px rgba(0,0,0,0.18);
-}
-
-.card-body{
-    padding:25px;
-}
-
-.card-title{
-    font-weight:bold;
-    color:#0d6efd;
-}
-
-.card-footer{
-    background:#fff;
-    border-top:1px solid #eee;
-    padding:15px;
-}
-
-.btn{
-    border-radius:30px;
-    font-weight:bold;
-}
-
-.btn-warning{
-    color:white;
-}
-
-input.form-control{
-    border-radius:30px;
-}
-
-.input-group .btn{
-    border-radius:30px;
-}
-
-.nav-link{
-    color:#fff !important;
-    font-weight:600;
-    transition:0.3s;
-}
-
-.nav-link:hover{
-    color:#ffd54f !important;
-}
-
-.navbar .btn{
-    margin-right:8px;
-    border-radius:12px;
-}
-
-.navbar-text{
-    color:white !important;
-    font-weight:600;
-}
-
-.navbar{
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.navbar-brand{
-    letter-spacing: .5px;
-}
-
-.nav-link{
-    border-radius:10px;
-    padding:8px 14px !important;
-}
-
-.nav-link:hover{
-    background:rgba(255,255,255,.15);
-}
-
-.navbar .btn{
-    min-width:85px;
-}
-
-.card{
-    overflow:hidden;
-}
-
-.card img{
-    transition:0.4s;
-}
-
-.card:hover img{
-    transform:scale(1.05);
-}
-
-.card-title{
-    min-height:60px;
-}
-
-.badge{
-    font-size:14px;
-    padding:8px 12px;
-    border-radius:20px;
-}
-
-.card-footer .btn{
-    flex:1;
-    margin:0 4px;
-}
-
-.form-control{
-    border-radius:15px;
-    padding:12px 15px;
-    border:1px solid #dcdcdc;
-    transition:.3s;
-}
-
-.form-control:focus{
-    border-color:#2563eb;
-    box-shadow:0 0 10px rgba(37,99,235,.2);
-}
-
-.form-label{
-    font-weight:600;
-    margin-bottom:8px;
-}
-
-.card{
-    animation:fade .5s ease;
-}
-
-@keyframes fade{
-
-    from{
-        opacity:0;
-        transform:translateY(20px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-
-}
-.form-control{
-    width:100%;
-    height:48px;
-}
-.search-box{
-    display:flex;
-    align-items:center;
-    background:#fff;
-    border-radius:60px;
-    padding:8px;
-    box-shadow:0 10px 30px rgba(0,0,0,.12);
-    transition:.35s;
-    border:2px solid transparent;
-}
-
-.search-box:hover{
-    transform:translateY(-2px);
-    box-shadow:0 15px 35px rgba(0,0,0,.18);
-}
-
-.search-box:focus-within{
-    border-color:#0d6efd;
-    box-shadow:0 0 0 6px rgba(13,110,253,.15);
-}
-
-.search-icon{
-    color:#0d6efd;
-    font-size:22px;
-    padding:0 15px;
-}
-
-.search-input{
-    flex:1;
-    border:none;
-    outline:none;
-    font-size:17px;
-    background:transparent;
-    padding:12px;
-}
-
-.search-input::placeholder{
-    color:#999;
-}
-
-.search-btn{
-    border:none;
-    background:linear-gradient(135deg,#0d6efd,#3b82f6);
-    color:#fff;
-    border-radius:40px;
-    padding:12px 28px;
-    font-weight:600;
-    transition:.3s;
-}
-
-.search-btn:hover{
-    transform:scale(1.05);
-    box-shadow:0 8px 20px rgba(13,110,253,.35);
-}
-
-.clear-btn{
-    color:#888;
-    text-decoration:none;
-    margin-left:10px;
-    transition:.3s;
-}
-
-.clear-btn:hover{
-    color:red;
-    transform:rotate(90deg);
-}
-
-@media(max-width:768px){
-
-    .search-box{
-        flex-wrap:wrap;
-        border-radius:25px;
-    }
-
-    .search-btn{
-        width:100%;
-        margin-top:10px;
-    }
-
-}
-
-.footer{
-    background:linear-gradient(135deg,#0f172a,#1d4ed8);
-    color:#fff;
-    padding:45px 20px;
-    text-align:center;
-    margin-top:70px;
-    box-shadow:0 -10px 25px rgba(0,0,0,.15);
-}
-
-.footer h4{
-    font-weight:700;
-    margin-bottom:15px;
-}
-
-.footer p{
-    color:#e5e7eb;
-    margin-bottom:10px;
-}
-
-.footer hr{
-    border-color:rgba(255,255,255,.2);
-    width:70%;
-    margin:20px auto;
-}
-
-.footer .badge{
-    margin:4px;
-    padding:10px 16px;
-    font-size:14px;
-    border-radius:30px;
-    transition:.3s;
-}
-
-.footer .badge:hover{
-    transform:translateY(-3px);
-}
-
-.footer small{
-    color:#d1d5db;
-}
-
-
-
-
-    </style>
+    
 
 </head>
 
@@ -438,32 +96,85 @@ input.form-control{
 </div>
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
- <footer class="footer mt-5">
+ <footer class="footer">
+
+    <div class="footer-wave">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+            <path fill="#f4f7fb"
+                d="M0,64L60,74.7C120,85,240,107,360,106.7C480,107,600,85,720,74.7C840,64,960,64,1080,74.7C1200,85,1320,107,1380,117.3L1440,128L1440,0L0,0Z">
+            </path>
+        </svg>
+    </div>
+
     <div class="container">
 
-        <h4 class="mb-3"> Library Management System</h4>
+        <div class="footer-logo">
+            <i class="bi bi-book-half"></i>
+            <h2>Library Management</h2>
+            <p>Modern Library Management System</p>
+        </div>
 
-        <p class="mb-2">
-            A simple and modern library management website built with Django
-        </p>
+        <div class="footer-tech">
 
-        <div class="mb-3">
-            <span class="badge bg-primary">Python</span>
-            <span class="badge bg-success">Django</span>
-            <span class="badge bg-dark">SQLite</span>
-            <span class="badge bg-warning text-dark">Bootstrap</span>
+            <div class="tech-card">
+                <i class="bi bi-filetype-py"></i>
+                <span>Python</span>
+            </div>
+
+            <div class="tech-card">
+                <i class="bi bi-lightning-charge-fill"></i>
+                <span>Django</span>
+            </div>
+
+            <div class="tech-card">
+                <i class="bi bi-bootstrap-fill"></i>
+                <span>Bootstrap</span>
+            </div>
+
+            <div class="tech-card">
+                <i class="bi bi-database-fill"></i>
+                <span>SQLite</span>
+            </div>
+
         </div>
 
         <hr>
 
-        <p class="mb-1">
-            Developed by <strong>AmirMohammad Mohebzadeh</strong>
+        <div class="developer">
+            <i class="bi bi-person-circle"></i>
+
+            Developed by
+
+            <strong>AmirMohammad Mohebzadeh</strong>
+        </div>
+
+        <div class="footer-links">
+
+            <a href="https://github.com/AmiriMohebzadeh/LibraryManagement"
+               target="_blank">
+               
+                <i class="bi bi-github"></i>
+                GitHub
+
+            </a>
+
+            <a href="#">
+                <i class="bi bi-arrow-up-circle-fill"></i>
+                Back to Top
+            </a>
+
+        </div>
+
+        <p class="copyright">
+            © 2026 Library Management System
         </p>
 
-        <small>© 2026 All Rights Reserved</small>
-
     </div>
+
 </footer>
+
+
+
 
 
 </body>
