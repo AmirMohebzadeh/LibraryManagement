@@ -6,6 +6,8 @@
 - Python
 - Django
 - SQLite
+- HTML
+- CSS
 
 امکانات:
 - افزودن کتاب
