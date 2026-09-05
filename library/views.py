@@ -1,5 +1,5 @@
 from django.db.models import Q
-from .models import Book, Category
+from .models import Book, Category, Profile
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Book
 from .forms import BookForm
@@ -10,6 +10,32 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from .forms import LoginForm
+from django.http import HttpResponseForbidden
+from functools import wraps
+
+def role_required(*roles):
+    def decorator(view_func):
+        @wraps(view_func)
+        def wrapper(request, *args, **kwargs):
+
+            if not request.user.is_authenticated:
+                return HttpResponseForbidden("ابتدا وارد حساب کاربری شوید.")
+
+            if request.user.is_superuser:
+                return view_func(request, *args, **kwargs)
+
+            try:
+                user_role = request.user.profile.role
+            except Profile.DoesNotExist:
+                return HttpResponseForbidden("برای حساب شما نقشی تعیین نشده است.")
+
+            if user_role not in roles:
+                return HttpResponseForbidden("شما اجازه انجام این کار را ندارید.")
+
+            return view_func(request, *args, **kwargs)
+
+        return wrapper
+    return decorator
 
 
 
@@ -38,7 +64,7 @@ def home(request):
         'categories': categories,
     })
 
-@login_required
+@role_required("librarian", "admin")
 def add_book(request):
     if request.method == "POST":
         form = BookForm(request.POST , request.FILES)
@@ -54,7 +80,7 @@ def add_book(request):
         'form': form
     })
 
-@login_required
+@role_required("librarian", "admin")
 def edit_book(request, book_id):
     book = get_object_or_404(Book, id=book_id)
 
@@ -72,7 +98,7 @@ def edit_book(request, book_id):
         'form': form
     })
 
-@login_required
+@role_required("admin")
 def delete_book(request, book_id):
     book = get_object_or_404(Book, id=book_id)
 
